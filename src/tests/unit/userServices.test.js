@@ -51,7 +51,7 @@ describe('Testing userServices', () => {
     describe('When it finds an email', () => {
       
       beforeEach(() => {
-        sinon.stub(userModels, 'findUserByEmail').resolves(userExample);
+        sinon.stub(userModels, 'findUserByEmail').resolves(userFound);
       });
 
       afterEach(() => {
@@ -84,7 +84,7 @@ describe('Testing userServices', () => {
           try {
               await userServices.createUser({ name: 'seuze', password: true, email: 'email@email.com', role: 'user' });
           } catch (error) {
-            expect(error).to.deep.equal({ message: '"password" must be a string', status: s.invalidRequest });
+            expect(error).to.deep.equal(new CustomError({ message: '"password" must be a string', status: s.invalidRequest }));
           }
         });
       });
@@ -94,7 +94,7 @@ describe('Testing userServices', () => {
           try {
               await userServices.createUser({ name: 'seuze', password: '123', email: 1234, role: 'user' });
           } catch (error) {
-            expect(error).to.deep.equal({ message: '"email" must be a string',status: s.invalidRequest });
+            expect(error).to.deep.equal(new CustomError({ message: '"email" must be a string',status: s.invalidRequest }));
           }
         });
       });
@@ -104,7 +104,7 @@ describe('Testing userServices', () => {
           try {
               await userServices.createUser({ name: 'seuze', password: '123', email: 'seuze', role: 'user' });
           } catch (error) {
-            expect(error).to.deep.equal({ message: '"email" must be a valid email', status: s.invalidRequest });
+            expect(error).to.deep.equal(new CustomError({ message: '"email" must be a valid email', status: s.invalidRequest }));
           }
         });
       });
@@ -114,7 +114,7 @@ describe('Testing userServices', () => {
           try {
               await userServices.createUser({ name: 'seuze', password: '123', email: 'seuze@email.com', role: 123 });
           } catch (error) {
-            expect(error).to.deep.equal({ message: '"role" must be a string', status: s.invalidRequest });
+            expect(error).to.deep.equal(new CustomError({ message: '"role" must be a string', status: s.invalidRequest }));
           }
         });
       });

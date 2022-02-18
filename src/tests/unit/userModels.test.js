@@ -19,7 +19,7 @@ describe('Testing userModel', () => {
   beforeEach(async () => {
     connectionMock = await connection();
     sinon.stub(MongoClient, 'connect').resolves(connectionMock);
-    await connectionMock.db('SeuzeStore').collection('users').insertOne(userExample);
+    await connectionMock.db('SeuzeStore').collection('users').insertOne({ user : userExample });
   });
 
   afterEach(async () => {
@@ -38,9 +38,9 @@ describe('Testing userModel', () => {
 
   describe('Testing o userModels.findUserByEmail', () => {
     it('If it is possible to find a user by email', async () => {
-      const { user }= await userModels.findUserByEmail(userExample.email);
+      const { user } = await userModels.findUserByEmail(userExample.email);
       expect(user).to.not.be.null;
-      expect(user).to.deep.equal(userExample);  
+      expect(user).to.deep.equal(userExample);
     });
   });
 
