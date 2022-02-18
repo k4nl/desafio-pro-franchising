@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const { MongoClient, ObjectId } = require('mongodb');
 
-const connection = require('./mongoConnection');
+const connection = require('../mongoConnection');
 
 const userModels = require('../../models/userModels')
 

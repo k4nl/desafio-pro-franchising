@@ -42,6 +42,7 @@ describe('Testing userServices', () => {
 
         expect(userCreated).to.be.a('object');
         expect(userCreated).to.have.property('_id');
+        expect(userCreated).to.not.have.property('password');
         expect(userCreated.user.name).to.deep.equal(userExample.name);
         expect(userCreated.user.email).to.deep.equal(userExample.email);
         expect(userCreated.user.role).to.deep.equal(userExample.role);
