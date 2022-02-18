@@ -15,7 +15,21 @@ const verifyIfUserEmailExists = (email) => {
   };
 };
 
+const verifyUser = (user) => {
+  if (!user) {
+    throw new CustomError(e.userNotFound)
+  }
+}
+
+const verifyPassword = ({ user }, password) => {
+  if (user.password !== password) {
+    throw new CustomError(e.incorrectPassword)
+  }
+}
+
 module.exports = {
   verifyIfUserEmailExists,
-  verifyJoiError
+  verifyJoiError,
+  verifyUser,
+  verifyPassword,
 }

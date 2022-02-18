@@ -6,6 +6,4 @@ const error = {
   incorrectPassword: {status: s.unauthorized, message: 'Incorrect Password'},
 }
 
-
-
 module.exports = error;

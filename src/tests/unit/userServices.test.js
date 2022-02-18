@@ -53,7 +53,7 @@ describe('Testing userServices', () => {
       });
       
       it('It should returns the created user', async () => {
-        const userCreated = await userServices.createUser(userLogin);
+        const userCreated = await userServices.createUser(userExample);
 
         expect(userCreated).to.be.a('object');
         expect(userCreated).to.have.property('_id');
@@ -151,8 +151,8 @@ describe('Testing userServices', () => {
         userModels.findUserByEmail.restore();
       });
       
-      it('It should returns login token', async () => {
-        const data = await userServices.login(userExample);
+      it('It should returns login token, user name and user email ', async () => {
+        const data = await userServices.login(userLogin);
 
         expect(data).to.be.a('object');
         expect(data).to.have.property('token');
@@ -187,7 +187,7 @@ describe('Testing userServices', () => {
     describe('When it has a wrong password', () => {
       
       beforeEach(() => {
-        sinon.stub(userModels, 'findUserByEmail').resolves(userExample);
+        sinon.stub(userModels, 'findUserByEmail').resolves(userFound);
       });
 
       afterEach(() => {
@@ -218,7 +218,7 @@ describe('Testing userServices', () => {
       describe('When email it is not a string', () => {
         it('Deve retornar um erro', async () => {
           try {
-              await userServices.createUser({ password: '123', email: 1234 });
+              await userServices.login({ password: '123', email: 1234 });
           } catch (error) {
             expect(error).to.deep.equal(new CustomError({ message: '"email" must be a string', status: s.invalidRequest }));
           }
@@ -228,7 +228,7 @@ describe('Testing userServices', () => {
       describe('When email it is not a valid email', () => {
         it('Deve retornar um erro', async () => {
           try {
-              await userServices.createUser({ password: '123', email: 'seuze' });
+              await userServices.login({ password: '123', email: 'seuze' });
           } catch (error) {
             expect(error).to.deep.equal(new CustomError({ message: '"email" must be a valid email', status: s.invalidRequest }));
           }
