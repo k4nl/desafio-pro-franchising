@@ -20,6 +20,16 @@ const userExample = {
   role: 'admin',
 };
 
+const userNotFound = {
+	email: 'emailnotregisted@email.com',
+	password: 'seuze123',
+};
+
+const incorrectPassword = {
+	email: 'seuze@lojinhadoseuze.com',
+	password: 'incorrectPassword',
+};
+
 describe('Testing userControllers', () => {
   describe('Testing createUser', () => {
     describe('When it is possible to create an user', () => {
@@ -39,7 +49,7 @@ describe('Testing userControllers', () => {
 
       it('Status must be 201', async() => {
         await userControllers.createUser(request, response);
-        expect(response.status.calledWith(201)).to.be.true;
+        expect(response.status.calledWith(s.created)).to.be.true;
       });
     });
 
@@ -55,7 +65,64 @@ describe('Testing userControllers', () => {
 
       it('With invalid data', async() => {
         await userControllers.createUser(request, response);
-        expect(response.status.calledWith(422)).to.be.true;
+        expect(response.status.calledWith(s.invalidRequest)).to.be.true;
+      });
+    });
+  });
+
+  /* ############################ LOGIN CONTROLLERS  ###########################*/
+
+  describe('Testing login Controllers', () => {
+    describe('When it is possible to login', () => {
+      const response = {};
+      const request = {};
+      
+      beforeEach(() => {
+        request.body = userExample;
+        response.status = sinon.stub().returns(response);
+        response.json = sinon.stub().returns();
+        sinon.stub(userServices, 'login').resolves(userFound);
+      });
+
+      afterEach(() => {
+        userServices.login.restore();
+      });
+
+      it('Status must be 201', async() => {
+        await userControllers.login(request, response);
+        expect(response.status.calledWith(s.success)).to.be.true;
+      });
+    });
+
+    describe('When it is not possible to login', () => {
+      const response = {};
+      const request = {};
+      const request2 = {};
+      const request3 = {};
+      const request4 = {};
+      
+      beforeEach(() => {
+        request.body = {};
+        request2.body = userNotFound;
+        request3.body = incorrectPassword;
+        request4.body = { name: 123, email: 'xablau@xablau.com'};
+        response.status = sinon.stub().returns(response);
+        response.json = sinon.stub().returns();
+      });
+
+      it('With invalid data', async() => {
+        await userControllers.login(request, response);
+        expect(response.status.calledWith(s.invalidRequest)).to.be.true;
+      });
+
+      it('With not registered email', async() => {
+        await userControllers.login(request2, response);
+        expect(response.status.calledWith(s.notFound)).to.be.true;
+      });
+
+      it('With wrong password', async() => {
+        await userControllers.login(request3, response);
+        expect(response.status.calledWith(s.unauthorized)).to.be.true;
       });
     });
   });
