@@ -24,7 +24,6 @@ const login = async (userData) => {
   verify.verifyJoiError(error);
 
   const userFound = await userModels.findUserByEmail(userData.email);
-  console.log(userFound);
   verify.verifyUser(userFound);
   verify.verifyPassword(userFound, userData.password);
 
