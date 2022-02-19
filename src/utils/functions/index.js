@@ -48,6 +48,12 @@ const dataFormat = (data) => {
   return newObject;
 }
 
+const verifyIfIngredientIdExist = (ingredient) => {
+  if (!ingredient) {
+    throw new CustomError(e.ingredientNotFound);
+  }
+}
+
 module.exports = {
   verifyIfUserEmailExists,
   verifyJoiError,
@@ -55,4 +61,5 @@ module.exports = {
   verifyPassword,
   verifyIngredientName,
   dataFormat,
+  verifyIfIngredientIdExist,
 }

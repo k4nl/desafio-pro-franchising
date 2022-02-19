@@ -48,7 +48,7 @@ describe('Testing ingredientServices', () => {
 
   /* ############################## CREATE INGREDIENT TESTS ################################ */
 
-  describe.only('Testing createIngredient', () => {
+  describe('Testing createIngredient', () => {
 
     describe('When the data received is correct', () => {
       
@@ -155,14 +155,15 @@ describe('Testing ingredientServices', () => {
       
       it('It should returns the ingredient', async () => {
         const ingredient = await ingredientServices.findIngredientById(ingredientFound._id);
+        console.log(ingredient);
 
         expect(ingredient).to.be.a('object');
         expect(ingredient).to.have.property('_id');
-        expect(ingredient.ingredient.name).to.deep.equal(ingredientFound.name);
-        expect(ingredient.ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.unitOfMeasurement);
-        expect(ingredient.ingredient.unitPrice).to.deep.equal(ingredientFound.unitPrice);
-        expect(ingredient.ingredient.quantity).to.deep.equal(ingredientFound.quantity);
-        expect(ingredient.ingredient.stockPrice).to.deep.equal(ingredientFound.stockPrice);
+        expect(ingredient.ingredient.name).to.deep.equal(ingredientFound.ingredient.name);
+        expect(ingredient.ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.ingredient.unitOfMeasurement);
+        expect(ingredient.ingredient.unitPrice).to.deep.equal(ingredientFound.ingredient.unitPrice);
+        expect(ingredient.ingredient.quantity).to.deep.equal(ingredientFound.ingredient.quantity);
+        expect(ingredient.ingredient.stockPrice).to.deep.equal(ingredientFound.ingredient.stockPrice);
       });
     });
 
@@ -178,14 +179,14 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-            await ingredientServices.findIngredientById(ingredientExample._id);
+            await ingredientServices.findIngredientById(ingredientFound._id);
         } catch (error) {
           expect(error).to.deep.equal(new CustomError(e.ingredientNotFound));
         }
       });
     });
 
-    describe('When it receives a wrong id', () => {
+    describe.only('When it receives a wrong id', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
@@ -197,7 +198,7 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-            await ingredientServices.findIngredientById('1234');
+            await ingredientServices.findIngredientById(1233);
         } catch (error) {
           expect(error).to.deep.equal(new CustomError(e.wrongObjectIdFormat));
         }
