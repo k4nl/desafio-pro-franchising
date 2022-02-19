@@ -9,9 +9,9 @@ const ingredientModels = require('../../models/ingredientModels')
 const ingredientExample = {
 	name: 'Cafe',
 	unitOfMeasurement: 'kg',
-	unitPrice: 25.00,
-  quantity: 10.00,
-  stockPrice: 250.00,
+	unitPrice: 25,
+  quantity: 10,
+  stockPrice: 250,
 };
 
 const ingredientUpdateQuantity = {
