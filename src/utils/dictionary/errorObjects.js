@@ -8,6 +8,7 @@ const error = {
   wrongObjectIdFormat: { status: s.invalidRequest, message: 'Wrong ObjectId format'},
   wrongQuantityFormat: { status: s.invalidRequest, message: 'Wrong quantity format, the quantity should be bigger than 0'},
   wrongUnitPriceFormat: { status: s.invalidRequest, message: 'Wrong unit price format, the unit price should be bigger than 0'},
+  invalidIngredientName: { status: s.invalidRequest, message: 'Ingredient`s name already exists, please choose another name'},
 }
 
 module.exports = error;

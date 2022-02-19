@@ -14,7 +14,6 @@ const ingredientExample = {
 	unitOfMeasurement: 'kg',
 	unitPrice: 25,
   quantity: 10,
-  stockPrice: 250,
 };
 
 const ingredientUpdateQuantity = {
@@ -49,15 +48,17 @@ describe('Testing ingredientServices', () => {
 
   /* ############################## CREATE INGREDIENT TESTS ################################ */
 
-  describe('Testing createIngredient', () => {
+  describe.only('Testing createIngredient', () => {
 
     describe('When the data received is correct', () => {
       
       beforeEach(() => {
-        sinon.stub(ingredientServices, 'createIngredient').resolves(ingredientExample);
+        sinon.stub(ingredientModels, 'findIngredientByName').resolves(null);
+        sinon.stub(ingredientServices, 'createIngredient').resolves(ingredientFound);
       });
 
       afterEach(() => {
+        ingredientModels.findIngredientByName.restore();
         ingredientServices.createIngredient.restore();
       });
       
@@ -70,7 +71,7 @@ describe('Testing ingredientServices', () => {
         expect(ingredientCreated.ingredient.unitOfMeasurement).to.deep.equal(ingredientExample.unitOfMeasurement);
         expect(ingredientCreated.ingredient.unitPrice).to.deep.equal(ingredientExample.unitPrice);
         expect(ingredientCreated.ingredient.quantity).to.deep.equal(ingredientExample.quantity);
-        expect(ingredientCreated.ingredient.stockPrice).to.deep.equal(ingredientExample.stockPrice);
+        expect(ingredientCreated.ingredient.stockPrice).to.deep.equal(ingredientExample.quantity * ingredientExample.unitPrice);
       });
     });
 
@@ -99,7 +100,7 @@ describe('Testing ingredientServices', () => {
       describe('When unitPrice it is not a number', () => {
         it('Should returns a error', async () => {
           try {
-              await ingredientServices.createIngredient({ ...ingredientExample, unitPrice: 123 });
+              await ingredientServices.createIngredient({ ...ingredientExample, unitPrice: 'xablau' });
           } catch (error) {
             expect(error).to.deep.equal(new CustomError({ message: '"unitPrice" must be a number',status: s.invalidRequest }));
           }
@@ -109,9 +110,9 @@ describe('Testing ingredientServices', () => {
       describe('When unitPrice it is not bigger than 0', () => {
         it('Should returns a error', async () => {
           try {
-              await ingredientServices.createIngredient({ ...ingredientExample, unitPrice: 123 });
+              await ingredientServices.createIngredient({ ...ingredientExample, unitPrice: -1 });
           } catch (error) {
-            expect(error).to.deep.equal(new CustomError({ message: '"unitPrice" must be bigger than 0',status: s.invalidRequest }));
+            expect(error).to.deep.equal(new CustomError({ message: '"unitPrice" must be greater than or equal to 0',status: s.invalidRequest }));
           }
         });
       });
@@ -119,9 +120,9 @@ describe('Testing ingredientServices', () => {
       describe('When quantity it is not a number', () => {
         it('Should returns a error', async () => {
           try {
-              await ingredientServices.createIngredient({ ...ingredientExample, quantity: 123 });
+              await ingredientServices.createIngredient({ ...ingredientExample, quantity: 'xablau' });
           } catch (error) {
-            expect(error).to.deep.equal(new CustomError({ message: '"role" must be a number', status: s.invalidRequest }));
+            expect(error).to.deep.equal(new CustomError({ message: '"quantity" must be a number', status: s.invalidRequest }));
           }
         });
       });
@@ -129,9 +130,9 @@ describe('Testing ingredientServices', () => {
       describe('When quantity it is not bigger than 0', () => {
         it('Should returns a error', async () => {
           try {
-              await ingredientServices.createIngredient({ ...ingredientExample, stockPrice: 123 });
+              await ingredientServices.createIngredient({ ...ingredientExample, quantity: -1 });
           } catch (error) {
-            expect(error).to.deep.equal(new CustomError({ message: '"stockPrice" must be bigger than 0', status: s.invalidRequest }));
+            expect(error).to.deep.equal(new CustomError({ message: '"quantity" must be greater than or equal to 0', status: s.invalidRequest }));
           }
         });
       });

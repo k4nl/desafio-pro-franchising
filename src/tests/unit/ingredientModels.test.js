@@ -7,7 +7,7 @@ const connection = require('../mongoConnection');
 const ingredientModels = require('../../models/ingredientModels')
 
 const ingredientExample = {
-	name: 'Cafe',
+	name: 'cafe',
 	unitOfMeasurement: 'kg',
 	unitPrice: 25,
   quantity: 10,
@@ -22,7 +22,7 @@ const ingredientUpdateQuantity = {
 const ingredientFound = {
   _id: '621024f346b909f4afca5b28',
   ingredient: {
-    name: 'Cafe',
+    name: 'cafe',
     unitOfMeasurement: 'kg',
     unitPrice: 25,
     quantity: 10,
@@ -103,6 +103,13 @@ describe('Testing ingredientModel', () => {
       const ingredientsAfterDeleted = await ingredientModels.findAll();
       expect(ingredients).to.have.lengthOf(1);
       expect(ingredientsAfterDeleted).to.have.lengthOf(0);
+    });
+  });
+
+  describe('Testing o ingredientModels.findIngredientByName', () => {
+    it('should be possible to find an ingredient', async () => {
+      const { ingredient } = await ingredientModels.findIngredientByName(ingredientExample.name);
+      expect(ingredient).to.deep.equal(ingredientFound.ingredient);
     });
   });
 });

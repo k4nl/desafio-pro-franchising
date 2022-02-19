@@ -15,6 +15,13 @@ const findIngredientById = async (ingredientId) => {
   return ingredient;
 };
 
+const findIngredientByName = async (ingredientName) => {
+  const db = await connection();
+  const ingredient = await db.collection('ingredients')
+  .findOne({ 'ingredient.name': ingredientName });
+  return ingredient;
+};
+
 const findAll = async () => {
   const db = await connection();
   const ingredients = await db.collection('ingredients')
@@ -49,6 +56,7 @@ const deleteIngredient = async (ingredientId) => {
 module.exports = {
   createIngredient,
   findIngredientById,
+  findIngredientByName,
   findAll,
   updateQuantity,
   updatePrice,

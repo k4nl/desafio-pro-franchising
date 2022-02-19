@@ -27,9 +27,32 @@ const verifyPassword = ({ user }, password) => {
   }
 }
 
+
+const verifyIngredientName = (ingredient) => {
+  if (ingredient) {
+    throw new CustomError(e.incorrectPassword)
+  }
+}
+
+const dataFormat = (data) => {
+  let newObject = {};
+  for (let [key, value] of Object.entries(data)) {
+    if (typeof value === 'string') {
+      return newObject[key] = value.toLowerCase();
+    }
+    newObject[key] = value;
+  }
+
+  newObject.stockPrice = Math.round((newObject.quantity * newObject.unitPrice), -2);
+
+  return newObject;
+}
+
 module.exports = {
   verifyIfUserEmailExists,
   verifyJoiError,
   verifyUser,
   verifyPassword,
+  verifyIngredientName,
+  dataFormat,
 }

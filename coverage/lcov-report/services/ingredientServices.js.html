@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for models/connection.js</title>
+    <title>Code coverage report for services/ingredientServices.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">models</a> connection.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> ingredientServices.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>10/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/9</span>
+                <span class='fraction'>10/16</span>
             </div>
         
             
@@ -80,41 +80,62 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">require('dotenv').config();
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { ObjectId } = require('mongodb');
+const ingredientModels = require('../models/ingredientModels');
+const CustomError = require('../middlewares/CustomError');
+const e = require('../utils/dictionary/errorObjects');
+const schema = require('../schemas/ingredientSchema');
+const verify = require('../utils/functions');
 &nbsp;
-const mongodb = require('mongodb').MongoClient;
 &nbsp;
-const MONGO_DB_URL = `mongodb://${process.env.HOST || <span class="branch-1 cbranch-no" title="branch not covered" >'mongodb'}</span>:27017`;
-const DB_NAME = 'SeuzeStore';
+const createIngredient = async (ingredientData) =&gt; {
+  const { error } = schema.ingredientSchema.validate(ingredientData);
+  verify.verifyJoiError(error);
+  const dataFormat = <span class="cstat-no" title="statement not covered" >verify.dataFormat(ingredientData);</span>
 &nbsp;
-const connection = <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >mongodb.connect(MONGO_DB_URL, {</span>
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(<span class="fstat-no" title="function not covered" >(c</span>onn) =&gt; <span class="cstat-no" title="statement not covered" >conn.db(DB_NAME))</span>
-  .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >    console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >    process.exit(1);</span>
-  });
+  const ingredient = <span class="cstat-no" title="statement not covered" >await ingredientModels.findIngredientByName(dataFormat.name);</span>
+<span class="cstat-no" title="statement not covered" >  verify.verifyIngredientName(ingredient);</span>
+<span class="cstat-no" title="statement not covered" >  console.log(dataFormat);</span>
 &nbsp;
-module.exports = connection;</pre></td></tr></table></pre>
+  const ingredientCreated = <span class="cstat-no" title="statement not covered" >await ingredientModels.createIngredient(dataFormat);</span>
+<span class="cstat-no" title="statement not covered" >  return ingredientCreated;</span>
+&nbsp;
+};
+&nbsp;
+module.exports = {
+  createIngredient,
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
