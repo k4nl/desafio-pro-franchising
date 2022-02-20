@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1645304835901" clover="3.2.0">
-  <project timestamp="1645304835901" name="All files">
-    <metrics statements="100" coveredstatements="48" conditionals="22" coveredconditionals="4" methods="20" coveredmethods="2" elements="142" coveredelements="54" complexity="0" loc="100" ncloc="100" packages="6" files="8" classes="8"/>
+<coverage generated="1645365686561" clover="3.2.0">
+  <project timestamp="1645365686561" name="All files">
+    <metrics statements="101" coveredstatements="45" conditionals="22" coveredconditionals="1" methods="21" coveredmethods="1" elements="144" coveredelements="47" complexity="0" loc="101" ncloc="101" packages="6" files="8" classes="8"/>
     <package name="middlewares">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="CustomError.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/middlewares/CustomError.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
       </file>
     </package>
@@ -69,9 +69,9 @@
       </file>
     </package>
     <package name="services">
-      <metrics statements="20" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
+      <metrics statements="21" coveredstatements="10" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="1"/>
       <file name="ingredientServices.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/services/ingredientServices.js">
-        <metrics statements="20" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="1"/>
+        <metrics statements="21" coveredstatements="10" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -86,12 +86,13 @@
         <line num="15" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="22" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
       </file>
     </package>
     <package name="utils.dictionary">

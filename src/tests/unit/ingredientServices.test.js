@@ -10,7 +10,7 @@ const s = require('../../utils/dictionary/status');
 const CustomError = require('../../middlewares/CustomError');
 
 const ingredientExample = {
-	name: 'Cafe',
+	name: 'cafe',
 	unitOfMeasurement: 'kg',
 	unitPrice: 25,
   quantity: 10,
@@ -24,7 +24,7 @@ const ingredientUpdateQuantity = {
 const ingredientFound = {
   _id: '621024f346b909f4afca5b28',
   ingredient: {
-    name: 'Cafe',
+    name: 'cafe',
     unitOfMeasurement: 'kg',
     unitPrice: 25,
     quantity: 10,
@@ -36,7 +36,7 @@ const ingredientFound = {
 const ingredientFound2 = {
   _id: '621024f346b909f4afca5r28',
   ingredient: {
-    name: 'Leite',
+    name: 'leite',
     unitOfMeasurement: 'l',
     unitPrice: 10,
     quantity: 10,
@@ -186,7 +186,7 @@ describe('Testing ingredientServices', () => {
       });
     });
 
-    describe.only('When it receives a wrong id', () => {
+    describe('When it receives a wrong id', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
@@ -206,7 +206,7 @@ describe('Testing ingredientServices', () => {
     });
   });
 
-  describe('Testing finding all ingredients ', () => {
+  describe.only('Testing finding all ingredients ', () => {
 
     describe('When its possible to find all ingredient', () => {
       
@@ -219,16 +219,16 @@ describe('Testing ingredientServices', () => {
       });
       
       it('It should returns all ingredients', async () => {
-        const ingredient = await ingredientServices.findAll();
+        const ingredients = await ingredientServices.findAll();
 
-        expect(ingredient).to.be.a('array');
-        expect(ingredient).to.have.lengthOf(2);
-        expect(ingredient[0].ingredient.name).to.deep.equal(ingredientFound.name);
-        expect(ingredient[1].ingredient.name).to.deep.equal(ingredientFound2.name);
-        expect(ingredient[0].ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.unitOfMeasurement);
-        expect(ingredient[0].ingredient.unitPrice).to.deep.equal(ingredientFound.unitPrice);
-        expect(ingredient[1].ingredient.quantity).to.deep.equal(ingredientFound2.quantity);
-        expect(ingredient[1].ingredient.stockPrice).to.deep.equal(ingredientFound2.stockPrice);
+        expect(ingredients).to.be.a('array');
+        expect(ingredients).to.have.lengthOf(2);
+        expect(ingredients[0].ingredient.name).to.deep.equal(ingredientFound.ingredient.name);
+        expect(ingredients[1].ingredient.name).to.deep.equal(ingredientFound2.ingredient.name);
+        expect(ingredients[0].ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.ingredient.unitOfMeasurement);
+        expect(ingredients[0].ingredient.unitPrice).to.deep.equal(ingredientFound.ingredient.unitPrice);
+        expect(ingredients[1].ingredient.quantity).to.deep.equal(ingredientFound2.ingredient.quantity);
+        expect(ingredients[1].ingredient.stockPrice).to.deep.equal(ingredientFound2.ingredient.stockPrice);
       });
     });
 

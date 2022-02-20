@@ -28,7 +28,11 @@ const findIngredientById = async (id) => {
   return ingredient;
 }
 
+const findAll = async () => ingredientModels.findAll();
+
+
 module.exports = {
   createIngredient,
   findIngredientById,
+  findAll,
 }
