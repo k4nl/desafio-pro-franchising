@@ -155,7 +155,6 @@ describe('Testing ingredientServices', () => {
       
       it('It should returns the ingredient', async () => {
         const ingredient = await ingredientServices.findIngredientById(ingredientFound._id);
-        console.log(ingredient);
 
         expect(ingredient).to.be.a('object');
         expect(ingredient).to.have.property('_id');
@@ -250,16 +249,16 @@ describe('Testing ingredientServices', () => {
     });
   });
 
-  describe.only('Testing update the the ingredient ', () => {
+  describe('Testing update the the ingredient ', () => {
 
     describe('When its possible to update the ingredient', () => {
       
       beforeEach(() => {
-        sinon.stub(ingredientServices, 'findIngredientById').resolves(ingredientFound._id);
+        sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
       });
 
       afterEach(() => {
-        ingredientServices.findIngredientById.restore();
+        ingredientModels.findIngredientById.restore();
       });
       
       it('It should returns the ingredient with the new quantity, unitPrice and stockPrice', async () => {
@@ -351,7 +350,7 @@ describe('Testing ingredientServices', () => {
 
         expect(ingredient).to.be.a('object');
         expect(ingredient._id).to.deep.equal(ingredientFound._id);
-        expect(ingredient.ingredient).to.deep.equal(ingredientFound);
+        expect(ingredient.ingredient).to.deep.equal(ingredientFound.ingredient);
       });
     });
 

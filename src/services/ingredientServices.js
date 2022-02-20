@@ -42,10 +42,17 @@ const updateIngredient = async (id, data) => {
   return { _id: id, ingredient: newData };
 };
 
+const deleteIngredient = async (id) => {
+  const ingredient = await findIngredientById(id);
+  await ingredientModels.deleteIngredient(id);
+  return ingredient;
+}
+
 
 module.exports = {
   createIngredient,
   findIngredientById,
   findAll,
   updateIngredient,
+  deleteIngredient,
 }
