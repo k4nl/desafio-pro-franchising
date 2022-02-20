@@ -80,7 +80,7 @@ describe('Testing ingredientControllers', () => {
       });
 
       it('Should return an error', async() => {
-        await ingredientControllers.createUser(request, response);
+        await ingredientControllers.createIngredient(request, response);
         expect(response.status.calledWith(s.invalidRequest)).to.be.true;
       });
     });
@@ -101,7 +101,7 @@ describe('Testing ingredientControllers', () => {
       })
 
       it('Should return an error', async() => {
-        await ingredientControllers.createUser(request, response);
+        await ingredientControllers.createIngredient(request, response);
         expect(response.status.calledWith(s.alreadyExists)).to.be.true;
       });
     });
@@ -115,7 +115,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id : ingredientFound._id };
+        request.body = { id : ingredientCreated._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientServices, 'findIngredientById').resolves(ingredientFound);
@@ -155,11 +155,11 @@ describe('Testing ingredientControllers', () => {
         request.body = { id: ingredientFound._id};
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
-        sinon.stub(ingredientServices, 'findIngredientById').resolves(null);
+        sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
       });
 
       afterEach(() => {
-        ingredientServices.findIngredientById.restore();
+        ingredientModels.findIngredientById.restore();
       })
 
       it('Should return an error', async() => {
@@ -177,7 +177,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { };
+        request.body = {};
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientServices, 'findAll').resolves([ingredientFound, ingredientCreated]);
@@ -204,10 +204,8 @@ describe('Testing ingredientControllers', () => {
       beforeEach(() => {
         request.body =
         { id: ingredientFound._id,
-          data: {
-            quantity: ingredientFound.ingredient.quantity,
-            unitPrice: ingredientFound.ingredient.unitPrice,
-          }
+          quantity: ingredientFound.ingredient.quantity,
+          unitPrice: ingredientFound.ingredient.unitPrice,
         };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
@@ -247,18 +245,16 @@ describe('Testing ingredientControllers', () => {
       beforeEach(() => {
         request.body =
         { id: ingredientFound._id,
-          data: {
-            quantity: ingredientFound.ingredient.quantity,
-            unitPrice: ingredientFound.ingredient.unitPrice,
-          }
+          quantity: ingredientFound.ingredient.quantity,
+          unitPrice: ingredientFound.ingredient.unitPrice,
         };
-        sinon.stub(ingredientServices, 'findIngredientById').resolves(null);
+        sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
       });
 
       afterEach(() => {
-        ingredientServices.findIngredientById.restore();
+        ingredientModels.findIngredientById.restore();
       });
 
       it('Status must be 404', async() => {
@@ -274,9 +270,7 @@ describe('Testing ingredientControllers', () => {
       beforeEach(() => {
         request.body =
         { id: ingredientFound._id,
-          data: {
-            unitPrice: ingredientFound.ingredient.unitPrice,
-          }
+          unitPrice: ingredientFound.ingredient.unitPrice,
         };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
@@ -300,11 +294,11 @@ describe('Testing ingredientControllers', () => {
         request.body = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
-        sinon.stub(ingredientServices, 'findIngredientById').resolves(ingredientFound);
+        sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
       });
 
       afterEach(() => {
-        ingredientServices.findIngredientById.restore();
+        ingredientModels.findIngredientById.restore();
       });
 
       it('Status must be 200', async() => {
@@ -337,11 +331,11 @@ describe('Testing ingredientControllers', () => {
         request.body = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
-        sinon.stub(ingredientServices, 'findIngredientById').resolves(null);
+        sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
       });
 
       afterEach(() => {
-        ingredientServices.findIngredientById.restore();
+        ingredientModels.findIngredientById.restore();
       });
   
       it('Status must be 404', async() => {

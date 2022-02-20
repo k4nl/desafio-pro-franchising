@@ -30,7 +30,7 @@ const verifyPassword = ({ user }, password) => {
 
 const verifyIngredientName = (ingredient) => {
   if (ingredient) {
-    throw new CustomError(e.incorrectPassword)
+    throw new CustomError(e.invalidIngredientName)
   }
 }
 
