@@ -115,7 +115,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id : ingredientCreated._id };
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientServices, 'findIngredientById').resolves(ingredientFound);
@@ -136,7 +136,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = {};
+        request.params = {};
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
       });
@@ -152,7 +152,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id: ingredientFound._id};
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
@@ -202,11 +202,13 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
+        
         request.body =
-        { id: ingredientFound._id,
+        {
           quantity: ingredientFound.ingredient.quantity,
           unitPrice: ingredientFound.ingredient.unitPrice,
         };
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientServices, 'updateIngredient').resolves(ingredientFound);
@@ -227,7 +229,12 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id: 'xablau' };
+        request.params = { id: 'xablau' };
+        request.body =
+        {
+          quantity: ingredientFound.ingredient.quantity,
+          unitPrice: ingredientFound.ingredient.unitPrice,
+        };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
       });
@@ -244,10 +251,11 @@ describe('Testing ingredientControllers', () => {
       
       beforeEach(() => {
         request.body =
-        { id: ingredientFound._id,
+        {
           quantity: ingredientFound.ingredient.quantity,
           unitPrice: ingredientFound.ingredient.unitPrice,
         };
+        request.params = { id: ingredientFound._id };
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
@@ -269,9 +277,10 @@ describe('Testing ingredientControllers', () => {
       
       beforeEach(() => {
         request.body =
-        { id: ingredientFound._id,
+        { 
           unitPrice: ingredientFound.ingredient.unitPrice,
         };
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
       });
@@ -291,7 +300,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id: ingredientFound._id };
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
@@ -312,7 +321,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id: 'xablau' };
+        request.params = { id: 'xablau' };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
       });
@@ -328,7 +337,7 @@ describe('Testing ingredientControllers', () => {
       const request = {};
       
       beforeEach(() => {
-        request.body = { id: ingredientFound._id };
+        request.params = { id: ingredientFound._id };
         response.status = sinon.stub().returns(response);
         response.json = sinon.stub().returns();
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);

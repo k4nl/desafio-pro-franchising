@@ -3,7 +3,8 @@ const cors = require('cors');
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
-const userControllers = require('./src/routes/userRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const ingredientRoutes = require('./src/routes/ingredientRoutes');
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
-app.use('/', userControllers);
+app.use('/ingredient', ingredientRoutes);
+app.use('/', userRoutes);
 
 
 const PORT = process.env.PORT || 3001;
