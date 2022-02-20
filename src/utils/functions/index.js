@@ -38,9 +38,10 @@ const dataFormat = (data) => {
   let newObject = {};
   for (let [key, value] of Object.entries(data)) {
     if (typeof value === 'string') {
-      return newObject[key] = value.toLowerCase();
+      newObject[key] = value.toLowerCase();
+    } else {
+      newObject[key] = value;
     }
-    newObject[key] = value;
   }
 
   newObject.stockPrice = Math.round((newObject.quantity * newObject.unitPrice), -2);

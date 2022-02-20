@@ -7,6 +7,12 @@ const ingredientSchema = Joi.object({
   unitPrice: Joi.number().min(0).required(),
 });
 
+const updateSchema = Joi.object({
+  quantity: Joi.number().min(0).required(),
+  unitPrice: Joi.number().min(0).required(),
+});
+
 module.exports = {
   ingredientSchema,
+  updateSchema,
 }

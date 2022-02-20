@@ -29,23 +29,19 @@ const findAll = async () => {
   return ingredients;
 };
 
-const updateQuantity = async (ingredientId, newQuantity, price) => {
+const updateIngredient = async (ingredientId, newData) => {
   const db = await connection();
-  const ingredient = await db.collection('ingredients').updateOne(
+  await db.collection('ingredients').updateOne(
     { _id: ObjectId(ingredientId) },
-    { $set: { 'ingredient.quantity': Number(newQuantity), 'ingredient.stockPrice': Number(newQuantity * price) } },
+    { $set: {
+      'ingredient.quantity': newData.quantity,
+      'ingredient.unitPrice': newData.unitPrice,
+      'ingredient.stockPrice': newData.stockPrice,
+      }
+    },
   );
-  return ingredient;
 };
 
-const updatePrice = async (ingredientId, newPrice, quantity) => {
-  const db = await connection();
-  const ingredient = await db.collection('ingredients').updateOne(
-    { _id: ObjectId(ingredientId)},
-    { $set: { 'ingredient.unitPrice': Number(newPrice), 'ingredient.stockPrice': Number(quantity * newPrice) } },
-  );
-  return ingredient;
-};
 
 const deleteIngredient = async (ingredientId) => {
   const db = await connection();
@@ -58,7 +54,6 @@ module.exports = {
   findIngredientById,
   findIngredientByName,
   findAll,
-  updateQuantity,
-  updatePrice,
+  updateIngredient,
   deleteIngredient,
 };

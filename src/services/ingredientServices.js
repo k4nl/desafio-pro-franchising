@@ -18,7 +18,7 @@ const createIngredient = async (ingredientData) => {
 };
 
 const findIngredientById = async (id) => {
-  if (!ObjectId.isValid(id) || id !== 'string') {
+  if (!ObjectId.isValid(id)) {
     throw new CustomError(e.wrongObjectIdFormat);
   };
 
@@ -30,9 +30,22 @@ const findIngredientById = async (id) => {
 
 const findAll = async () => ingredientModels.findAll();
 
+const updateIngredient = async (id, data) => {
+  const { error } = schema.updateSchema.validate(data);
+  verify.verifyJoiError(error);
+
+  const { ingredient } = await findIngredientById(id);
+  const newData = verify.dataFormat({ ...ingredient, quantity: data.quantity, unitPrice: data.unitPrice });
+
+  await ingredientModels.updateIngredient(id, newData);
+
+  return { _id: id, ingredient: newData };
+};
+
 
 module.exports = {
   createIngredient,
   findIngredientById,
   findAll,
+  updateIngredient,
 }
