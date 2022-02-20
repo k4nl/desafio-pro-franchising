@@ -205,6 +205,8 @@ describe('Testing ingredientServices', () => {
     });
   });
 
+  /* ########################## FINDING ALL INGREDIENTS  ####################################*/
+
   describe('Testing finding all ingredients ', () => {
 
     describe('When its possible to find all ingredient', () => {
@@ -248,6 +250,8 @@ describe('Testing ingredientServices', () => {
       });
     });
   });
+
+  /* ########################## UPDATING INGREDIENT  ####################################*/
 
   describe('Testing update the the ingredient ', () => {
 
@@ -332,6 +336,8 @@ describe('Testing ingredientServices', () => {
       });
     });
   });
+
+  /* ########################## DELETING INGREDIENT  ####################################*/
 
   describe('Testing delete ingredient function ', () => {
 
