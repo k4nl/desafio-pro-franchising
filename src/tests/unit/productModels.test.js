@@ -24,6 +24,18 @@ const productExample = {
   ],
 };
 
+const productData = {
+  price: 10,
+  image: 'outraimagem.png',
+  productIngredients: [
+    {
+      ingredientId: '621024f346b909f4afca5b28',
+      quantity: 10,
+      unitOfMeasurement: 'g'
+    },
+  ],
+}
+
 
 describe('Testing productModels', () => {
   let connectionMock;
@@ -62,11 +74,11 @@ describe('Testing productModels', () => {
 
   describe('Testing o productModels.updateproduct', () => {
     it('should be possible to update an product', async () => {
-      await productModels.updateproduct(productId, productData);
+      await productModels.updateProduct(productId, productData);
       const { product } = await productModels.findProductById(productId);
       
-      expect(product.price).to.not.equal(productExample.price);
-      expect(product.productIngredients).to.deep.equal(productExample.productIngredients);
+      expect(product.price).to.deep.equal(productData.price);
+      expect(product.productIngredients).to.deep.equal(productData.productIngredients);
     });
   });
 
@@ -79,5 +91,16 @@ describe('Testing productModels', () => {
       expect(productsAfterDeleted).to.be.null;
     });
   });
+
+  describe('Testing o productModels.uploadProductImage', () => {
+    it('should be possible to delete an product', async () => {
+      const product = await productModels.findProductById(productId);
+      await productModels.uploadProductImage(productId);
+      const productsAfterDeleted = await productModels.findProductById(productId);
+      expect(product).to.not.be.null;
+      expect(productsAfterDeleted).to.be.null;
+    });
+  });
+
 
 });

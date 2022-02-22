@@ -1,190 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1645376462328" clover="3.2.0">
-  <project timestamp="1645376462328" name="All files">
-    <metrics statements="137" coveredstatements="110" conditionals="20" coveredconditionals="12" methods="27" coveredmethods="17" elements="184" coveredelements="139" complexity="0" loc="137" ncloc="137" packages="7" files="9" classes="9"/>
-    <package name="controllers">
-      <metrics statements="29" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
-      <file name="ingredientControllers.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/controllers/ingredientControllers.js">
-        <metrics statements="29" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="35" count="4" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
-        <line num="45" count="3" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="48" count="2" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="middlewares">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="CustomError.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/middlewares/CustomError.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="3" count="9" type="stmt"/>
-        <line num="4" count="9" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-      </file>
-    </package>
+<coverage generated="1645539723475" clover="3.2.0">
+  <project timestamp="1645539723475" name="All files">
+    <metrics statements="38" coveredstatements="34" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="7" elements="49" coveredelements="42" complexity="0" loc="38" ncloc="38" packages="2" files="3" classes="3"/>
     <package name="models">
-      <metrics statements="34" coveredstatements="18" conditionals="2" coveredconditionals="1" methods="9" coveredmethods="3"/>
+      <metrics statements="30" coveredstatements="26" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="6"/>
       <file name="connection.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/models/connection.js">
         <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="8" count="7" type="stmt"/>
+        <line num="12" count="7" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
       </file>
-      <file name="ingredientModels.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/models/ingredientModels.js">
-        <metrics statements="25" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="1"/>
+      <file name="productModels.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/models/productModels.js">
+        <metrics statements="21" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="schemas">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="ingredientSchema.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/schemas/ingredientSchema.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="services">
-      <metrics statements="32" coveredstatements="28" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="4"/>
-      <file name="ingredientServices.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/services/ingredientServices.js">
-        <metrics statements="32" coveredstatements="28" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="4"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="21" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="22" count="3" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="26" count="4" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="utils.dictionary">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="errorObjects.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/utils/dictionary/errorObjects.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-      </file>
-      <file name="status.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/utils/dictionary/status.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="utils.functions">
-      <metrics statements="31" coveredstatements="25" conditionals="16" coveredconditionals="9" methods="7" coveredmethods="4"/>
-      <file name="index.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/utils/functions/index.js">
-        <metrics statements="31" coveredstatements="25" conditionals="16" coveredconditionals="9" methods="7" coveredmethods="4"/>
+    <package name="tests">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="mongoConnection.js" path="/home/gustavo/desafio/desafio-pro-franchising/src/tests/mongoConnection.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="7" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="53" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
     </package>
   </project>
