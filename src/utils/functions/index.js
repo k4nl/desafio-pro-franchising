@@ -55,6 +55,12 @@ const verifyIfIngredientIdExist = (ingredient) => {
   }
 }
 
+const verifyUser = (user) => {
+  if (user.role !== 'admin') {
+    throw new CustomError(e.unauthorized);
+  }
+}
+
 module.exports = {
   verifyIfUserEmailExists,
   verifyJoiError,
