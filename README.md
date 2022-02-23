@@ -19,39 +19,6 @@ Antes de iniciar o projeto, você deverá seguir as instruções a seguir. Fique
 - Cors
 
 
-- [Entregáveis](#entregáveis)
-  - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
-  - [Desenvolvimento](#desenvolvimento)
-  - [Data de entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-  - [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
-- [Como desenvolver](#como-desenvolver)
-  - [Linter](#linter)
-  - [Instrução para estrutura dos arquivos](#Instrução-para-estrutura-dos-arquivos)
-  - [Instruções para restaurar o banco de dados `aggregations`](#Instruções-para-restaurar-o-banco-de-dados-aggregations)
-  - [Execução de testes unitários](#execução-de-testes-unitários)
-- [Requisitos do projeto](#requisitos-do-projeto)
-  - [Lista de requisitos](#lista-de-requisitos)
-    - [Desafio 1](#Desafio-1)
-    - [Desafio 2](#Desafio-2)
-    - [Desafio 3](#Desafio-3)
-    - [Desafio 4](#Desafio-4)
-    - [Desafio 5](#Desafio-5)
-    - [Desafio 6](#Desafio-6)
-    - [Desafio 7](#Desafio-7)
-    - [Desafio 8](#Desafio-8)
-    - [Desafio 9](#Desafio-9)
-    - [Desafio 10](#Desafio-10)
-    - [Desafio 11](#Desafio-11)
-    - [Desafio 12](#Desafio-12)
-    - [Desafio 13](#Desafio-13)
-    - [Desafio 14](#Desafio-14)
-- [Avisos Finais](#avisos-finais)
-
----
-
 # Entregáveis
 
 ## O que deverá ser desenvolvido?
