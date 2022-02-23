@@ -9,6 +9,7 @@ const verify = require('../utils/functions');
 const createIngredient = async (ingredientData) => {
   const { error } = schema.ingredientSchema.validate(ingredientData);
   verify.verifyJoiError(error);
+  verify.verifyUnitOfMeasurement(ingredientData.unitOfMeasurement);
   const dataFormat = verify.dataFormat(ingredientData);
 
   const ingredient = await ingredientModels.findIngredientByName(dataFormat.name);
