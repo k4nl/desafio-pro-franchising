@@ -116,10 +116,12 @@ status: 201
 
 - Metodo `POST` na rota `/sign`
 
+```
 { 
 	"email": "email@email.com",
 	"password": "senhasupersegura"
 }
+```
 
 O retorno do login:
 
@@ -448,7 +450,6 @@ O retorno devera ser:
 	},
 	"image": "localhost:3002/src/uploads/621537b01133145d1d7e15c0.png"
 }
-
 ```
 
 - A imagem ficara salva na pasta uploads, o nome sera exatamente o mesmo id do produto + '.png'.
