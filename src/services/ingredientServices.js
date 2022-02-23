@@ -1,5 +1,6 @@
-const { ObjectId, isValid } = require('mongodb');
+const { ObjectId } = require('mongodb');
 const ingredientModels = require('../models/ingredientModels');
+const productModels = require('../models/productModels')
 const CustomError = require('../middlewares/CustomError');
 const e = require('../utils/dictionary/errorObjects');
 const schema = require('../schemas/ingredientSchema');
@@ -38,7 +39,11 @@ const updateIngredient = async (id, data) => {
   const { ingredient } = await findIngredientById(id);
   const newData = verify.dataFormat({ ...ingredient, quantity: data.quantity, unitPrice: data.unitPrice });
 
-  await ingredientModels.updateIngredient(id, newData);
+  await ingredientModels.updateIngredient(id, newData)
+  const products = await productModels.findAllProducts();
+  const productsCostUpdated = verify.verifyAllProductsToUpdate(products, id, newData);
+  
+  await productsCostUpdated.forEach(({ _id, product}) => productModels.updateProductCost(_id, product));
 
   return { _id: id, ingredient: newData };
 };

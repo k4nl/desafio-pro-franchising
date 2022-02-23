@@ -139,6 +139,8 @@ status: 200,
 
 ## Para todas as atividades de ingredientes (criar, editar, visualizar, deletar) é necessario estar logado com uma conta de role: admin, o token devera ser informado no headers na chave authorization.
 
+### ATENCAO: todas as vezes que atualizamos o custo de um ingrediente, atualizamos tambem o custo de todos os produtos que contem aquele ingrediente!
+
 
 Se atente a estrutura de dados que devem ser enviados para o cadastro e manutencao de ingredientes.
 As unidades de medida dos ingredientes devem ser obrigatoriamente:
@@ -299,6 +301,7 @@ Status: 200,
 ## Para todas as atividades de produtos (criar, editar, visualizar, deletar) é necessario estar logado com uma conta de role: admin, o token devera ser informado no headers na chave authorization.
 
 
+
 Se atente a estrutura de dados que devem ser enviados para o cadastro e manutencao de produtos.
 
 
@@ -415,6 +418,7 @@ O retorno devera ser:
 ```
 
 - Caso nao exista produtos cadastrados o retorno sera um array vazio - []
+
 
 4. Para fazer upload de imagem de determinado produto Metodo `PUT` na rota `/product/:id/image` onde :id = id do produto.
 

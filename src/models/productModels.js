@@ -29,6 +29,14 @@ const updateProduct = async (productId, productData) => {
   return product;
 };
 
+const updateProductCost = async (id, product) => {
+  const db = await connection();
+  await db.collection('products').updateOne(
+    { _id: ObjectId(id)} ,
+    { $set: { 'product.cost': product.cost } },
+  );
+}
+
 const findAllProducts = async () => {
   const db = await connection();
   return db.collection('products').find({}).toArray();
@@ -57,4 +65,5 @@ module.exports = {
   deleteProduct,
   uploadImage,
   findAllProducts,
+  updateProductCost,
 };

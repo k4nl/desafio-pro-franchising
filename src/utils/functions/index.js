@@ -119,6 +119,8 @@ const verifyIfProductExists = (product) => {
 };
 
 const setSameUnitOfMensurement = (stock, req) => {
+  console.log(stock);
+  console.log(req);
   if (stock.unitOfMeasurement === 'kg' || stock.unitOfMeasurement === 'l') {
     if (req.unitOfMeasurement === 'g' ||  req.unitOfMeasurement === 'ml') {
       return req.quantity / 1000;
@@ -147,7 +149,7 @@ const verifyIngredientStock = (allIngredients, ingredientNeeded) => {
      
     const sameUnit = setSameUnitOfMensurement(ingredientFound.ingredient, { unitOfMeasurement, quantity });
     verifyQuantity(ingredientFound.ingredient, sameUnit);
-    const reducedStockPrice = Math.round(sameUnit * ingredientFound.ingredient.unitPrice)
+    const reducedStockPrice = Math.round(sameUnit * ingredientFound.ingredient.unitPrice * 100) / 100;
     return {
       _id:  JSON.stringify(ingredientFound._id).replaceAll('"', ''),
       name: ingredientFound.ingredient.name,
@@ -155,6 +157,17 @@ const verifyIngredientStock = (allIngredients, ingredientNeeded) => {
       quantity: sameUnit,
     };
   })
+}
+
+const verifyAllProductsToUpdate = (allProducts, id, data) => {
+  return allProducts.filter((p) => {
+    const ingredientFound = p.product.productIngredients.find((i) => (JSON.stringify(i.ingredientId).replaceAll('"', '') === id));
+      if (ingredientFound) {
+        const sameUnit = setSameUnitOfMensurement(data, ingredientFound);
+        p.product.cost = Math.round(data.unitPrice * sameUnit* 100) / 100;
+        return p;
+      }
+  });
 }
 
 
@@ -172,4 +185,5 @@ module.exports = {
   setNewQuantity,
   verifyIngredientStock,
   verifyUnitOfMeasurement,
+  verifyAllProductsToUpdate,
 }

@@ -9,7 +9,10 @@ const createProduct = async (productData) => {
 
   const allIngredients = await ingredientServices.findAll();
   verify.verifyIfAllIngredientsExists(allIngredients, productData.productIngredients);
-  const { ops } = await productModels.createProduct(productData);
+  const cost = verify
+    .verifyIngredientStock(allIngredients, productData.productIngredients)
+    .reduce((acc, curr) => acc + curr.stockPrice, 0);
+  const { ops } = await productModels.createProduct({ ...productData, cost });
   return ops[0];
 };
 
