@@ -1,5 +1,5 @@
 const connection = require('./connection');
-const { ObjectId } = require('mongodb')
+const { ObjectId } = require('mongodb');
 
 const createIngredient = async (ingredientData) => {
   const db = await connection();
@@ -48,6 +48,18 @@ const deleteIngredient = async (ingredientId) => {
   await db.collection('ingredients').deleteOne({ _id: ObjectId(ingredientId) });
 };
 
+const decreaseIngredientStock = async (ingredient) => {
+  const db = await connection();
+  return db.collection('ingredients').updateOne(
+    { _id: ObjectId(ingredient._id) },
+    { $inc: {
+      'ingredient.quantity': -ingredient.quantity,
+      'ingredient.stockPrice': -ingredient.stockPrice,
+      },
+    },
+  );
+}
+
 
 module.exports = {
   createIngredient,
@@ -56,4 +68,5 @@ module.exports = {
   findAll,
   updateIngredient,
   deleteIngredient,
+  decreaseIngredientStock,
 };

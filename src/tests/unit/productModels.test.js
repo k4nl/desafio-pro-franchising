@@ -8,7 +8,7 @@ const productModels = require('../../models/productModels')
 
 const productExample = {
   name: 'cafe com leite',
-  image: 'https://static1.conquistesuavida.com.br/articles//2/19/72/@/5471-pensando-de-forma-saudavel-o-indicado-article_gallery-2.jpg',
+  // image: 'https://static1.conquistesuavida.com.br/articles//2/19/72/@/5471-pensando-de-forma-saudavel-o-indicado-article_gallery-2.jpg',
   price: 3,
   productIngredients: [
     {
@@ -24,9 +24,18 @@ const productExample = {
   ],
 };
 
+const file = {
+  
+}
+
+const productInput = {
+  name: 'xablau',
+  price: 1,
+  productIngredient: [ { ingredientId: '621024f346b909f4afca5b28', quantity: 10, unitOfMeasurement: 'g' }],
+}
+
 const productData = {
   price: 10,
-  image: 'outraimagem.png',
   productIngredients: [
     {
       ingredientId: '621024f346b909f4afca5b28',
@@ -93,12 +102,10 @@ describe('Testing productModels', () => {
   });
 
   describe('Testing o productModels.uploadProductImage', () => {
-    it('should be possible to delete an product', async () => {
-      const product = await productModels.findProductById(productId);
-      await productModels.uploadProductImage(productId);
-      const productsAfterDeleted = await productModels.findProductById(productId);
-      expect(product).to.not.be.null;
-      expect(productsAfterDeleted).to.be.null;
+    it('should be possible to upload an product', async () => {
+      await productModels.uploadProductImage(productId, file);
+      const { product } = await productModels.findProductById(productId);
+      expect(product.image).to.deep.equal(imagesrc);
     });
   });
 

@@ -22,13 +22,17 @@ const updateProduct = async (productId, productData) => {
     { _id: ObjectId(productId) },
     { $set: {
       'product.price': productData.price,
-      'product.image': productData.image,
       'product.productIngredients': productData.productIngredients,
       }
     },
   );
   return product;
 };
+
+const findAllProducts = async () => {
+  const db = await connection();
+  return db.collection('products').find({}).toArray();
+}
 
 
 const deleteProduct = async (productId) => {
@@ -42,7 +46,6 @@ const uploadImage = async (productId, filename) => {
   return db.collection('products').findOneAndUpdate(
     { _id: ObjectId(productId) },
     { $set: { image: `localhost:3002/src/uploads/${filename}`} },
-    { returnOriginal: false },
   )
 }
 
@@ -53,4 +56,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   uploadImage,
+  findAllProducts,
 };

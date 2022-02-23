@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const CustomError = require('./CustomError');
 const e = require('../utils/dictionary/status');
+const verify = require('../utils/functions/index');
 
 const secret = process.env.SECRET || 'mecontrata';
 
@@ -11,13 +12,12 @@ const jwtConfig = {
 }
 
 const ingredientRouteVerify = (req, res, next) => {
-  const { Authorization } = req.headers;
-  if (!Authorization) throw new CustomError(e.unauthorized);
+  const { authorization } = req.headers;
+  if (!authorization) throw new CustomError(e.unauthorized);
 
   try {
-    const decoded = jwt.verify(token, secret);
-    const user = decoded.data;
-    verify.verifyUser(user);
+    const decoded = jwt.verify(authorization, secret);
+    verify.verifyUserAdmin(decoded.data);
     return next();
   } catch (error) {
     return res.status(error.status).json(error);
