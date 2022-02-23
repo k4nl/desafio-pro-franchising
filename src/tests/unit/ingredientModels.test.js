@@ -74,27 +74,16 @@ describe('Testing ingredientModel', () => {
     });
   });
 
-  describe('Testing o ingredientModels.updateQuantity', () => {
-    it('should be possible to update an ingredient quantity', async () => {
-      const { result } = await ingredientModels.updateQuantity(ingredientId, 30, ingredientExample.unitPrice);
+  describe('Testing o ingredientModels.updateIngredient', () => {
+    it('should be possible to update an ingredient', async () => {
+      await ingredientModels.updateIngredient(ingredientId, { quantity: 100, unitPrice: 20, stockPrice: 2000 });
       const { ingredient } = await ingredientModels.findIngredientById(ingredientId);
-
-      expect(result.nModified).to.deep.equal(1);
+      
       expect(ingredient.quantity).to.not.equal(ingredientExample.quantity);
       expect(ingredient.stockPrice).to.deep.equal(Number(ingredient.quantity * ingredient.unitPrice));
     });
   });
 
-  describe('Testing o ingredientModels.updatePrice', () => {
-    it('shoulb be possible to update an ingredient price', async () => {
-      const { result } = await ingredientModels.updatePrice(ingredientId, 40, ingredientExample.quantity);
-      const { ingredient } = await ingredientModels.findIngredientById(ingredientId);
-
-      expect(result.nModified).to.deep.equal(1);
-      expect(ingredient.unitPrice).to.not.equal(ingredientExample.unitPrice);
-      expect(ingredient.stockPrice).to.deep.equal(Number(ingredient.quantity * ingredient.unitPrice));
-    });
-  });
 
   describe('Testing o ingredientModels.deleteIngredient', () => {
     it('should be possible to delete an ingredient', async () => {

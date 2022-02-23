@@ -10,7 +10,7 @@ const s = require('../../utils/dictionary/status');
 const CustomError = require('../../middlewares/CustomError');
 
 const ingredientExample = {
-	name: 'Cafe',
+	name: 'cafe',
 	unitOfMeasurement: 'kg',
 	unitPrice: 25,
   quantity: 10,
@@ -24,7 +24,7 @@ const ingredientUpdateQuantity = {
 const ingredientFound = {
   _id: '621024f346b909f4afca5b28',
   ingredient: {
-    name: 'Cafe',
+    name: 'cafe',
     unitOfMeasurement: 'kg',
     unitPrice: 25,
     quantity: 10,
@@ -36,7 +36,7 @@ const ingredientFound = {
 const ingredientFound2 = {
   _id: '621024f346b909f4afca5r28',
   ingredient: {
-    name: 'Leite',
+    name: 'leite',
     unitOfMeasurement: 'l',
     unitPrice: 10,
     quantity: 10,
@@ -155,7 +155,6 @@ describe('Testing ingredientServices', () => {
       
       it('It should returns the ingredient', async () => {
         const ingredient = await ingredientServices.findIngredientById(ingredientFound._id);
-        console.log(ingredient);
 
         expect(ingredient).to.be.a('object');
         expect(ingredient).to.have.property('_id');
@@ -186,7 +185,7 @@ describe('Testing ingredientServices', () => {
       });
     });
 
-    describe.only('When it receives a wrong id', () => {
+    describe('When it receives a wrong id', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
@@ -198,13 +197,15 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-            await ingredientServices.findIngredientById(1233);
+            await ingredientServices.findIngredientById('xablau');
         } catch (error) {
           expect(error).to.deep.equal(new CustomError(e.wrongObjectIdFormat));
         }
       });
     });
   });
+
+  /* ########################## FINDING ALL INGREDIENTS  ####################################*/
 
   describe('Testing finding all ingredients ', () => {
 
@@ -219,16 +220,16 @@ describe('Testing ingredientServices', () => {
       });
       
       it('It should returns all ingredients', async () => {
-        const ingredient = await ingredientServices.findAll();
+        const ingredients = await ingredientServices.findAll();
 
-        expect(ingredient).to.be.a('array');
-        expect(ingredient).to.have.lengthOf(2);
-        expect(ingredient[0].ingredient.name).to.deep.equal(ingredientFound.name);
-        expect(ingredient[1].ingredient.name).to.deep.equal(ingredientFound2.name);
-        expect(ingredient[0].ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.unitOfMeasurement);
-        expect(ingredient[0].ingredient.unitPrice).to.deep.equal(ingredientFound.unitPrice);
-        expect(ingredient[1].ingredient.quantity).to.deep.equal(ingredientFound2.quantity);
-        expect(ingredient[1].ingredient.stockPrice).to.deep.equal(ingredientFound2.stockPrice);
+        expect(ingredients).to.be.a('array');
+        expect(ingredients).to.have.lengthOf(2);
+        expect(ingredients[0].ingredient.name).to.deep.equal(ingredientFound.ingredient.name);
+        expect(ingredients[1].ingredient.name).to.deep.equal(ingredientFound2.ingredient.name);
+        expect(ingredients[0].ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.ingredient.unitOfMeasurement);
+        expect(ingredients[0].ingredient.unitPrice).to.deep.equal(ingredientFound.ingredient.unitPrice);
+        expect(ingredients[1].ingredient.quantity).to.deep.equal(ingredientFound2.ingredient.quantity);
+        expect(ingredients[1].ingredient.stockPrice).to.deep.equal(ingredientFound2.ingredient.stockPrice);
       });
     });
 
@@ -250,34 +251,34 @@ describe('Testing ingredientServices', () => {
     });
   });
 
-  describe('Testing update the quantity of the ingredient ', () => {
+  /* ########################## UPDATING INGREDIENT  ####################################*/
 
-    describe('When its possible to update the quantity', () => {
+  describe('Testing update the the ingredient ', () => {
+
+    describe('When its possible to update the ingredient', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
-        sinon.stub(ingredientModels, 'updateQuantity').resolves([ingredientFound, ingredientFound2]);
       });
 
       afterEach(() => {
-        ingredientModels.updateQuantity.restore();
         ingredientModels.findIngredientById.restore();
       });
       
-      it('It should returns the ingredient with the new quantity', async () => {
-        const ingredient = await ingredientServices.updateQuantity(ingredientFound._id, 100, ingredientFound.ingredient.unitPrice);
+      it('It should returns the ingredient with the new quantity, unitPrice and stockPrice', async () => {
+        const ingredient = await ingredientServices.updateIngredient(ingredientFound._id, { quantity: 100, unitPrice: 250 });
 
         expect(ingredient).to.be.a('object');
         expect(ingredient._id).to.deep.equal(ingredientFound._id);
-        expect(ingredient.ingredient.name).to.deep.equal(ingredientFound.name);
-        expect(ingredient.ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.unitOfMeasurement);
-        expect(ingredient.ingredient.unitPrice).to.deep.equal(ingredientFound.unitPrice);
+        expect(ingredient.ingredient.name).to.deep.equal(ingredientFound.ingredient.name);
+        expect(ingredient.ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.ingredient.unitOfMeasurement);
+        expect(ingredient.ingredient.unitPrice).to.not.equal(ingredientFound.ingredient.unitPrice);
         expect(ingredient.ingredient.quantity).to.deep.equal(100);
-        expect(ingredient.ingredient.stockPrice).to.deep.equal(ingredientFound.unitPrice * 100);
+        expect(ingredient.ingredient.stockPrice).to.deep.equal(100 * 250);
       });
     });
 
-    describe('When it is not possible to update the quantity because the ingredient doesnt exist', () => {
+    describe('When it is not possible to update because the ingredient doesnt exist', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
@@ -289,14 +290,14 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-          await ingredientServices.updateQuantity(ingredientFound._id, 100, ingredientFound.ingredient.unitPrice);
+          await ingredientServices.updateIngredient(ingredientFound._id, { quantity: 100, unitPrice: 250 });
       } catch (error) {
         expect(error).to.deep.equal(new CustomError(e.ingredientNotFound));
       }
       });
     });
 
-    describe('When it is not possible to update the quantity because the quantity is smaller than 0', () => {
+    describe('When it is not possible to update because the quantity is smaller than 0', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
@@ -308,61 +309,15 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-          await ingredientServices.updateQuantity(ingredientFound._id, -25, ingredientFound.ingredient.unitPrice);
+          await ingredientServices.updateIngredient(ingredientFound._id, { quantity: -25, unitPrice: 250 });
       } catch (error) {
-        expect(error).to.deep.equal(new CustomError(e.wrongQuantityFormat));
+        expect(error).to.deep.equal(new CustomError({ status: s.invalidRequest, message: '"quantity" must be greater than or equal to 0'}));
       }
       });
     });
   });
 
-  describe('Testing update the unit price of the ingredient ', () => {
-
-    describe('When its possible to update the unit price', () => {
-      
-      beforeEach(() => {
-        sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
-        sinon.stub(ingredientModels, 'updatePrice').resolves([ingredientFound, ingredientFound2]);
-      });
-
-      afterEach(() => {
-        ingredientModels.updatePrice.restore();
-        ingredientModels.findIngredientById.restore();
-      });
-      
-      it('It should returns the ingredient with the new quantity', async () => {
-        const ingredient = await ingredientServices.updatePrice(ingredientFound._id, 100, ingredientFound.ingredient.quantity);
-
-        expect(ingredient).to.be.a('object');
-        expect(ingredient._id).to.deep.equal(ingredientFound._id);
-        expect(ingredient.ingredient.name).to.deep.equal(ingredientFound.name);
-        expect(ingredient.ingredient.unitOfMeasurement).to.deep.equal(ingredientFound.unitOfMeasurement);
-        expect(ingredient.ingredient.quantity).to.deep.equal(ingredientFound.quantity);
-        expect(ingredient.ingredient.unitPrice).to.deep.equal(100);
-        expect(ingredient.ingredient.stockPrice).to.deep.equal(ingredientFound.quantity * 100);
-      });
-    });
-
-    describe('When it is not possible to update the quantity because the ingredient doesnt exist', () => {
-      
-      beforeEach(() => {
-        sinon.stub(ingredientModels, 'findIngredientById').resolves(null);
-      });
-
-      afterEach(() => {
-        ingredientModels.findIngredientById.restore();
-      });
-      
-      it('It should return an error', async () => {
-        try {
-          await ingredientServices.updatePrice(ingredientFound._id, 100, ingredientFound.ingredient.quantity);
-      } catch (error) {
-        expect(error).to.deep.equal(new CustomError(e.ingredientNotFound));
-      }
-      });
-    });
-
-    describe('When it is not possible to update the unitPrice because it is smaller than 0', () => {
+    describe('When it is not possible to update the ingredient because unitPrice it is smaller than 0', () => {
       
       beforeEach(() => {
         sinon.stub(ingredientModels, 'findIngredientById').resolves(ingredientFound);
@@ -374,13 +329,15 @@ describe('Testing ingredientServices', () => {
       
       it('It should return an error', async () => {
         try {
-          await ingredientServices.updatePrice(ingredientFound._id, -25, ingredientFound.ingredient.quantity);
+          await ingredientServices.updateIngredient(ingredientFound._id, { quantity: 100, unitPrice: -250 });
       } catch (error) {
-        expect(error).to.deep.equal(new CustomError(e.wrongUnitPriceFormat));
+        expect(error).to.deep.equal(new CustomError({ status: s.invalidRequest, message: '"unitPrice" must be greater than or equal to 0'}));
       }
       });
     });
   });
+
+  /* ########################## DELETING INGREDIENT  ####################################*/
 
   describe('Testing delete ingredient function ', () => {
 
@@ -399,7 +356,7 @@ describe('Testing ingredientServices', () => {
 
         expect(ingredient).to.be.a('object');
         expect(ingredient._id).to.deep.equal(ingredientFound._id);
-        expect(ingredient.ingredient).to.deep.equal(ingredientFound);
+        expect(ingredient.ingredient).to.deep.equal(ingredientFound.ingredient);
       });
     });
 
@@ -419,7 +376,7 @@ describe('Testing ingredientServices', () => {
       } catch (error) {
         expect(error).to.deep.equal(new CustomError(e.ingredientNotFound));
       }
-      });
+
     });
   });
 });
