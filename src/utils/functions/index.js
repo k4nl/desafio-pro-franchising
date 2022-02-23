@@ -35,6 +35,13 @@ const verifyIngredientName = (ingredient) => {
   }
 }
 
+const verifyUnitOfMeasurement = (unit) => {
+  const available = ['kg', 'g', 'u', 'l', 'ml'];
+  if (!available.includes(unit)) {
+    throw new CustomError(e.unitOfMeasurementNotAvailable)
+  }
+}
+
 const dataFormat = (data) => {
   let newObject = {};
   for (let [key, value] of Object.entries(data)) {
@@ -139,11 +146,11 @@ const verifyIngredientStock = (allIngredients, ingredientNeeded) => {
     verifyIfIngredientIdExist(ingredientFound);
      
     const sameUnit = setSameUnitOfMensurement(ingredientFound.ingredient, { unitOfMeasurement, quantity });
-    console.log(sameUnit);
     verifyQuantity(ingredientFound.ingredient, sameUnit);
     const reducedStockPrice = Math.round(sameUnit * ingredientFound.ingredient.unitPrice)
     return {
       _id:  JSON.stringify(ingredientFound._id).replaceAll('"', ''),
+      name: ingredientFound.ingredient.name,
       stockPrice: reducedStockPrice,
       quantity: sameUnit,
     };
@@ -164,4 +171,5 @@ module.exports = {
   verifyIfProductExists,
   setNewQuantity,
   verifyIngredientStock,
+  verifyUnitOfMeasurement,
 }

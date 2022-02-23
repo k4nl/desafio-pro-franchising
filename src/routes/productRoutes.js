@@ -8,9 +8,9 @@ const upload = require('../middlewares/multer');
 
 router.post('/', auth.ingredientRouteVerify, productControllers.createProduct);
 router.put('/:id/image', auth.ingredientRouteVerify, upload, productControllers.uploadImage);
+router.delete('/:id', auth.ingredientRouteVerify, productControllers.deleteProduct);
 router.get('/:id', productControllers.findProductById);
 router.get('/', productControllers.findAllProducts);
-router.delete('/:id', auth.ingredientRouteVerify, productControllers.deleteProduct);
 
 
 module.exports = router;
