@@ -76,7 +76,7 @@ Precisamos de uma rota que retorne todos os produtos e o custo de cada um.
 4. Conecte-se ao mongoDB e utilize o comando na pasta raiz do projeto `npm start`.
 
   
-## REGRAS DE NEGOCIO DA APLICACAO
+# REGRAS DE NEGOCIO DA APLICACAO
 
 
 # Criacao de usuario e login.
@@ -93,7 +93,7 @@ Devera ser enviado no body os seguintes dados:
 	"name": "meu nome",
 	"email": "email@email.com",
 	"password": "senhasupersegura",
-  "role": "user"
+  "role": "user",
 }
 ```
 O retorno da criacao do usuario:
@@ -106,7 +106,7 @@ status: 201
 	"user": {
 		"name": "meu nome",
 		"email": "email@email.com",
-		"role": "user"
+		"role": "user",
 	}
 }
 ```
@@ -166,7 +166,7 @@ O nome do ingrediente deve ser unico, caso ja exista um nome identico no banco d
 { 
 	"name": "cafe",
 	"unitOfMeasurement": "kg",
-  "quantity": 10
+  "quantity": 10,
   "unitPrice": 20,
 }
 ```
