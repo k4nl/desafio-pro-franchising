@@ -88,17 +88,19 @@ Se atente a estrutura de dados que devem ser enviados para o login e para a cria
 
 Devera ser enviado no body os seguintes dados: 
 
+```
 { 
 	"name": "meu nome",
 	"email": "email@email.com",
 	"password": "senhasupersegura",
   "role": "user"
 }
-
+```
 O retorno da criacao do usuario:
 
 status: 201
 
+```
 {
 	"_id": "621500201d9def2f8521f38d",
 	"user": {
@@ -107,6 +109,8 @@ status: 201
 		"role": "user"
 	}
 }
+```
+
 
 2. Para fazer login na aplicacao é necessario enviar no body os seguintes dados:
 
@@ -121,6 +125,7 @@ O retorno do login:
 
 status: 200, 
 
+```
 {
 	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNjIxNTdkNDlhZjYzZGE5Mjg2NDg4NWVjIiwiZW1haWwiOiJzZXV6ZUBsb2ppbmhhZG9zZXV6ZS5jb20iLCJyb2xlIjoiYWRtaW4ifSwiaWF0IjoxNjQ1NTc2MjcxLCJleHAiOjE2NDU1Nzk4NzF9._3gckdwU6yKgQP_J4_1BApnSVM9DQra7JaB0iAjh5wI",
 	"user": {
@@ -128,7 +133,7 @@ status: 200,
 		"email": "seuze@lojinhadoseuze.com"
 	}
 }
-
+```
 
 # Cadastro e manutencao de ingredientes.
 
@@ -136,13 +141,15 @@ status: 200,
 
 
 Se atente a estrutura de dados que devem ser enviados para o cadastro e manutencao de ingredientes.
-As unidades de medida dos ingredientes devem ser obrigatoriamente
+As unidades de medida dos ingredientes devem ser obrigatoriamente:
+
+```
 "kg", - Kilograma
 "g", - grama
 "l", - litro
 "ml", - mililitro
 "u", - unidade
-
+```
 
 
 1. Para criar um ingrediente - Metodo `POST` na rota `/ingredient`.
@@ -151,15 +158,18 @@ Devera ser feito um
 
 O nome do ingrediente deve ser unico, caso ja exista um nome identico no banco de dados retornara um erro.
 
+```
 { 
 	"name": "cafe",
 	"unitOfMeasurement": "kg",
   "quantity": 10
   "unitPrice": 20,
 }
+```
 
 O retorno devera ser:
 
+```
 {
   _id: '621024f346b909f4afca5b28',
   ingredient: {
@@ -170,6 +180,7 @@ O retorno devera ser:
     stockPrice: 200,
   }
 }
+```
 
 2. Para visualizar um ingrediente Metodo `GET` na rota `/ingredient/:id`, onde em :id = id do ingrediente.
 
@@ -177,6 +188,7 @@ Devera ser enviado no params o id do ingrediente.
 
 O retorno devera ser: 
 
+```
 {
   _id: '621024f346b909f4afca5b28',
   ingredient: {
@@ -187,11 +199,13 @@ O retorno devera ser:
     stockPrice: 250,
   }
 }
+```
 
 3. Para visualizar todos os ingredientes Metodo `GET` na rota `/ingredient`.
 
 O retorno devera ser: 
 
+```
 [
 	{
 		"_id": "62157d4aaf63da92864885ed",
@@ -214,6 +228,8 @@ O retorno devera ser:
 		}
 	},
 ]
+```
+
 
 4. Para editar determinado ingrediente Metodo `PUT` na rota `/ingredient/:id` onde :id = id do ingrediente.
 
@@ -221,10 +237,12 @@ Devera ser enviado no params o id do ingrediente;
 
 O body deve conter a seguinte estrutura:
 
+```
 {
 	"quantity": 1000,
 	"unitPrice": 10
 }
+```
 
 As regras de negocio sao: 
 
@@ -238,6 +256,7 @@ O retorno devera ser:
 
 status: 200, 
 
+```
 {
 	"_id": "62157d4aaf63da92864885f1",
 	"ingredient": {
@@ -248,7 +267,7 @@ status: 200,
 		"stockPrice": 10000
 	}
 }
-
+```
 
 5. Para deletar determinado ingrediente Metodo `DELETE` na rota `/ingredient/:id` onde :id = id do ingrediente.
 
@@ -262,6 +281,7 @@ O retorno devera ser:
 
 Status: 200,
 
+```
 {
 	"_id": "62157d4aaf63da92864885f1",
 	"ingredient": {
@@ -272,6 +292,7 @@ Status: 200,
 		"stockPrice": 10000
 	}
 }
+```
 
 # Cadastro e manutencao de produtos.
 
@@ -286,6 +307,7 @@ Se atente a estrutura de dados que devem ser enviados para o cadastro e manutenc
 
 O body devera conter a seguinte estrutura de dados:
 
+```
 {
   "name": "banana com maca",
   "price": 10,
@@ -293,6 +315,7 @@ O body devera conter a seguinte estrutura de dados:
 		{ "ingredientId": "621024f346b909f4afca5b28", "quantity": 10, "unitOfMeasurement": "g" }
 	]
 }
+```
 
 - Onde name eh o nome do produto,
 - Price eh o preco do produto,
@@ -311,6 +334,7 @@ Devera ser enviado no params o id do produto.
 
 O retorno devera ser: 
 
+```
 {
 	"_id": "62157f727ee18843c3e2850c",
 	"product": {
@@ -335,13 +359,14 @@ O retorno devera ser:
 		]
 	}
 }
-
+```
 
 
 3. Para visualizar todos os produtos -  Metodo `GET` na rota `/product`.
 
 O retorno devera ser: 
 
+```
 [
 	{
 		"_id": "62157f727ee18843c3e2850b",
@@ -387,6 +412,7 @@ O retorno devera ser:
 		}
 	},
 ]
+```
 
 - Caso nao exista produtos cadastrados o retorno sera um array vazio - []
 
@@ -397,6 +423,7 @@ A requisicao devera ser feita com multipart form, a chave devera ser image e dev
 
 O retorno devera ser:
 
+```
 {
 	"_id": "621537b01133145d1d7e15c0",
 	"product": {
@@ -417,6 +444,8 @@ O retorno devera ser:
 	},
 	"image": "localhost:3002/src/uploads/621537b01133145d1d7e15c0.png"
 }
+
+```
 
 - A imagem ficara salva na pasta uploads, o nome sera exatamente o mesmo id do produto + '.png'.
 - Para visualizar a foto devera entrar na rota:
@@ -443,6 +472,7 @@ O retorno devera ser:
 
 Status: 200,
 
+```
 const productExample = {
   name: 'cafe com leite',
   price: 3,
@@ -459,6 +489,7 @@ const productExample = {
     },
   ],
 };
+```
 
 # Vendas de produtos.
 
@@ -469,6 +500,7 @@ const productExample = {
 
 O body devera conter a seguinte estrutura de dados:
 
+```
 [
 	{
 		"productId": "62157f727ee18843c3e2850e",
@@ -479,6 +511,7 @@ O body devera conter a seguinte estrutura de dados:
 		"quantity": 2
 	}	
 ]
+```
 
 - Cada objeto eh uma produto,
 - Cada venda possui a quantidade do produto vendido,
@@ -497,6 +530,7 @@ houver quantidade suficiente para atender todos os produtos incluidos na venda.
 
 O retorno da venda devera ser:
 
+```
 {
 	"sale": {
 		"productsSold": [
@@ -522,6 +556,7 @@ O retorno da venda devera ser:
 		"cost": 3
 	}
 }
+```
 
 - A chave cost indica o custo do produto.
 
